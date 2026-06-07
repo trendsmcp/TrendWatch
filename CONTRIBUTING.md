@@ -17,7 +17,7 @@ python -m trendwatch check
 
 ## Guidelines
 - Keep dependencies minimal (currently just `requests` + `PyYAML`) so it stays fast and reliable on CI.
-- A failing notification channel or a bad keyword should **never** crash a run — log and continue.
+- A failing notification channel or a bad keyword should **never** crash a run - log and continue.
 - Never commit secrets. Keys belong in `.env` (local) or GitHub Secrets (CI).
 
 ## Submitting

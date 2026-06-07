@@ -1,7 +1,7 @@
 """Build the shareable artifacts: a dated Markdown report and a live README block.
 
 The README block turns the repo's own front page into a living trend dashboard
-(updated by the scheduled workflow) — a screenshot-worthy, link-worthy artifact,
+(updated by the scheduled workflow) - a screenshot-worthy, link-worthy artifact,
 which is exactly the kind of thing that earns stars and backlinks.
 """
 from __future__ import annotations
@@ -25,7 +25,7 @@ def build_markdown(events: list[Event], leaderboards: dict[str, list]) -> str:
     breakouts = [e for e in events if e.kind == "breakout"]
     trending = [e for e in events if e.kind == "trending"]
 
-    lines = [f"# 📊 TrendWatch report — {_now()}", ""]
+    lines = [f"# 📊 TrendWatch report - {_now()}", ""]
 
     if breakouts:
         lines.append("## 🚀 Watchlist breakouts")
@@ -46,7 +46,7 @@ def build_markdown(events: list[Event], leaderboards: dict[str, list]) -> str:
         lines.append("")
 
     for feed, names in leaderboards.items():
-        lines.append(f"## 🔝 {feed} — top {len(names)}")
+        lines.append(f"## 🔝 {feed} - top {len(names)}")
         lines.append("")
         for i, name in enumerate(names, start=1):
             lines.append(f"{i}. {name}")
@@ -68,7 +68,7 @@ def write_reports(markdown: str) -> None:
 
 def _readme_block(events: list[Event], leaderboards: dict[str, list]) -> str:
     breakouts = [e for e in events if e.kind == "breakout"]
-    lines = [README_START, "", f"### 📊 Live trends — updated {_now()}", ""]
+    lines = [README_START, "", f"### 📊 Live trends - updated {_now()}", ""]
 
     if breakouts:
         lines.append("**🚀 Breakouts on the watchlist**")

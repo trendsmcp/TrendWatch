@@ -1,9 +1,9 @@
 # ┌─────────────────────────────────────────────────────────────────────┐
-# │  TrendWatch config — this is the ONLY file most people need to edit.  │
+# │  TrendWatch config - this is the ONLY file most people need to edit.  │
 # │  Powered by Trends MCP · get a free key at https://trendsmcp.ai       │
 # └─────────────────────────────────────────────────────────────────────┘
 
-# 1) WATCHLIST — keywords you want a heads-up about when they start spiking.
+# 1) WATCHLIST - keywords you want a heads-up about when they start spiking.
 #    Each (keyword × source) costs 1 API request per run. Keep it lean on the
 #    free tier (100 req/month). Run `python -m trendwatch quota` to see the math.
 watchlist:
@@ -22,13 +22,13 @@ watchlist:
 #   tiktok · reddit · amazon · wikipedia · news volume · news sentiment
 #   app downloads · npm · steam
 
-# 2) BREAKOUT detection — when does a watched keyword count as "breaking out"?
+# 2) BREAKOUT detection - when does a watched keyword count as "breaking out"?
 breakout:
   period: "7D"            # window to measure growth over (7D, 14D, 30D, 1M, 3M, ...)
   threshold_pct: 50       # alert when growth over `period` is >= this %
   also_periods: ["1M", "3M"]   # shown for context in the alert (no extra quota)
 
-# 3) DISCOVERY — watch live leaderboards and ping you when something NEW appears.
+# 3) DISCOVERY - watch live leaderboards and ping you when something NEW appears.
 #    This is the "what's hot right now" radar. Each feed = 1 request per run.
 discovery:
   feeds:
@@ -46,11 +46,11 @@ discovery:
   filter_keywords: []     # optional: only alert on items containing these words
                           # e.g. ["ai", "crypto", "nvidia"]. empty = all new entrants
 
-# 4) REPORTS — the shareable artifacts TrendWatch writes back to your repo.
+# 4) REPORTS - the shareable artifacts TrendWatch writes back to your repo.
 report:
   update_readme: true     # keep a live trend dashboard in your README
   write_markdown: true    # save reports/latest.md + a dated archive each run
 
-# 5) SCHEDULE — set the actual cron in .github/workflows/trendwatch.yml.
+# 5) SCHEDULE - set the actual cron in .github/workflows/trendwatch.yml.
 #    Tip: on the free tier, a 3-request config can run daily (~90/month). For
 #    hourly checks or a bigger watchlist, upgrade at https://trendsmcp.ai/pricing

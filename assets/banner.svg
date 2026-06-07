@@ -1,42 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="TrendWatch — free trend monitoring and breakout alerts">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400" role="img" aria-label="TrendWatch: free trend monitoring and breakout alerts, powered by Trends MCP">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0d1117"/>
-      <stop offset="1" stop-color="#161b22"/>
+    <!-- brand logo gradient (from trendsmcp.ai) -->
+    <linearGradient id="g" x1="2" y1="20" x2="22" y2="4" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#2ecf8e"/>
+      <stop offset="40%"  stop-color="#5be5a8"/>
+      <stop offset="78%"  stop-color="#b8f5d8"/>
+      <stop offset="100%" stop-color="#ffffff"/>
     </linearGradient>
-    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#2ea043"/>
-      <stop offset="1" stop-color="#3fb950"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#061410"/>
+      <stop offset="100%" stop-color="#040e09"/>
     </linearGradient>
-    <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2ea043" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#2ea043" stop-opacity="0"/>
+    <linearGradient id="trend" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2ecf8e"/>
+      <stop offset="100%" stop-color="#b8f5d8"/>
+    </linearGradient>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2ecf8e" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#2ecf8e" stop-opacity="0"/>
     </linearGradient>
   </defs>
 
-  <rect width="1200" height="360" rx="16" fill="url(#bg)"/>
+  <rect width="1280" height="400" rx="20" fill="url(#bg)"/>
 
-  <!-- rising trend chart -->
-  <path d="M60 280 L180 270 L300 255 L420 250 L540 225 L660 215 L780 170 L900 150 L1020 80 L1140 40"
-        fill="none" stroke="url(#line)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M60 280 L180 270 L300 255 L420 250 L540 225 L660 215 L780 170 L900 150 L1020 80 L1140 40 L1140 320 L60 320 Z"
-        fill="url(#fill)"/>
-  <circle cx="1140" cy="40" r="8" fill="#3fb950"/>
+  <!-- background rising trend line (echoes the logo) -->
+  <path d="M812 312 L900 294 L980 250 L1062 236 L1142 150 L1232 64 L1232 344 L812 344 Z" fill="url(#area)"/>
+  <path d="M812 312 L900 294 L980 250 L1062 236 L1142 150 L1232 64"
+        fill="none" stroke="url(#trend)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="1232" cy="64" r="8" fill="#b8f5d8"/>
 
-  <!-- title -->
-  <text x="60" y="110" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="68" font-weight="800" fill="#f0f6fc">📈 TrendWatch</text>
-  <text x="62" y="158" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="27" font-weight="600" fill="#adbac7">Get pinged the moment a topic starts blowing up.</text>
-  <text x="62" y="194" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" fill="#768390">Google · TikTok · YouTube · Reddit · Amazon — alerts to Slack / Discord / Telegram / email.</text>
-
-  <!-- chips -->
-  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="600">
-    <rect x="62" y="232" width="150" height="40" rx="20" fill="#1f6feb"/>
-    <text x="137" y="258" fill="#ffffff" text-anchor="middle">100% free</text>
-    <rect x="224" y="232" width="160" height="40" rx="20" fill="#238636"/>
-    <text x="304" y="258" fill="#ffffff" text-anchor="middle">No scraping</text>
-    <rect x="396" y="232" width="230" height="40" rx="20" fill="#30363d"/>
-    <text x="511" y="258" fill="#e6edf3" text-anchor="middle">Runs on GitHub Actions</text>
+  <!-- brand logo tile -->
+  <rect x="64" y="120" width="108" height="108" rx="24" fill="#04130c" stroke="#15392a" stroke-width="1.5"/>
+  <g transform="translate(79,135) scale(3.25)">
+    <path d="M20.684 4.042A1.029 1.029 0 0 1 22 5.03l-.001 5.712a1.03 1.03 0 0 1-1.647.823L18.71 10.33l-4.18 5.568a1.647 1.647 0 0 1-2.155.428l-.15-.1-3.337-2.507-4.418 5.885c-.42.56-1.185.707-1.777.368l-.144-.095a1.372 1.372 0 0 1-.368-1.776l.095-.144 5.077-6.762a1.646 1.646 0 0 1 2.156-.428l.149.1 3.336 2.506 3.522-4.69-1.647-1.237a1.03 1.03 0 0 1 .194-1.76l.137-.05 5.485-1.595-.001.001z" fill="url(#g)"/>
   </g>
 
-  <text x="62" y="318" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" fill="#636e7b">Powered by Trends MCP · trendsmcp.ai</text>
+  <!-- wordmark -->
+  <text x="200" y="192" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="76" font-weight="800" fill="#f4fbf8">TrendWatch</text>
+  <text x="202" y="238" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="27" font-weight="600" fill="#9db3aa">Get pinged the moment a topic starts blowing up.</text>
+  <text x="202" y="272" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18.5" fill="#6f857d">Google · TikTok · YouTube · Reddit · Amazon. Alerts in Slack, Discord, Telegram or email.</text>
+
+  <!-- chips -->
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700">
+    <rect x="202" y="296" width="138" height="40" rx="20" fill="#2ecf8e"/>
+    <text x="271" y="322" fill="#04140d" text-anchor="middle">100% free</text>
+    <rect x="352" y="296" width="156" height="40" rx="20" fill="none" stroke="#2ecf8e" stroke-width="1.5"/>
+    <text x="430" y="322" fill="#7fe9bf" text-anchor="middle">No scraping</text>
+    <rect x="520" y="296" width="226" height="40" rx="20" fill="#0c2018"/>
+    <text x="633" y="322" fill="#cfeede" text-anchor="middle">Runs on GitHub Actions</text>
+  </g>
+
+  <text x="202" y="372" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15.5" fill="#54655e">Powered by Trends MCP · trendsmcp.ai</text>
 </svg>

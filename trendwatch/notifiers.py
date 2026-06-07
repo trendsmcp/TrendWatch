@@ -43,7 +43,7 @@ def _build_summary(events: list[Event]) -> tuple[str, str]:
         lines.append("*Newly trending*")
         lines.extend(f"• {e.detail}" for e in trending[:25])
     lines.append("")
-    lines.append("_Powered by Trends MCP — https://www.trendsmcp.ai_")
+    lines.append("_Powered by Trends MCP · https://www.trendsmcp.ai_")
     return heading, "\n".join(lines)
 
 
@@ -156,22 +156,32 @@ def configured_channels() -> list[str]:
     return active
 
 
+def _send_all(heading: str, body: str, events: list[Event]) -> None:
+    """Push one message to every configured channel; a broken channel never stops the rest."""
+    print("\n" + heading)
+    print(_md_to_plain(body))
+    for name, fn in CHANNELS.items():
+        try:
+            fn(heading, body, events)
+        except Exception as exc:  # never let one channel break the others
+            print(f"  ! {name} notification failed: {exc}")
+
+
 def dispatch(events: list[Event]) -> None:
     """Send a batch of events to every configured channel."""
     if not events:
         print("No alerts to send this run.")
         return
     heading, body = _build_summary(events)
+    _send_all(heading, body, events)
 
-    # always print to the Actions log
-    print("\n" + heading)
-    print(_md_to_plain(body))
 
-    for name, fn in CHANNELS.items():
-        try:
-            fn(heading, body, events)
-        except Exception as exc:  # never let one channel break the others
-            print(f"  ! {name} notification failed: {exc}")
+def send_notice(heading: str, body: str) -> None:
+    """Send a standalone message (no events) to every configured channel.
+
+    Used for operational nudges such as the free-tier-limit / upgrade prompt.
+    """
+    _send_all(heading, body, [])
 
 
 def send_test() -> None:
@@ -180,7 +190,7 @@ def send_test() -> None:
         Event(
             kind="breakout",
             title="trendwatch test",
-            detail="📈 *TrendWatch test alert* — if you can read this, your channel works!",
+            detail="📈 *TrendWatch test alert* - if you can read this, your channel works!",
             source="self-test",
             score=100,
         )

@@ -23,7 +23,7 @@ from . import __version__
 from .client import MissingKey, RateLimited, TrendsClient, TrendsError
 from .config import load_config
 from .monitor import run_monitor
-from .notifiers import configured_channels, dispatch, send_test
+from .notifiers import configured_channels, dispatch, send_notice, send_test
 from .quota import print_report
 from .report import build_markdown, update_readme, write_reports
 from .state import load_state, save_state
@@ -38,7 +38,21 @@ def cmd_run(args: argparse.Namespace) -> int:
     active = configured_channels()
     print(f"Channels: {', '.join(active) if active else 'console only (add a webhook secret to get notified)'}")
 
-    events, leaderboards = run_monitor(client, cfg, state)
+    try:
+        events, leaderboards = run_monitor(client, cfg, state)
+    except RateLimited as exc:
+        # Don't fail silently: ping the user through their own channels and nudge an upgrade.
+        print(f"\n⚠ Free-tier quota reached: {exc}")
+        send_notice(
+            "⚠️ TrendWatch paused: monthly free-tier limit reached",
+            "You've used all *100 free* Trends MCP requests this month, so TrendWatch can't "
+            "check your trends until the quota resets.\n\n"
+            "Keep your alerts running with *more keywords, more sources, and hourly checks* 👉 "
+            "https://trendsmcp.ai/pricing\n\n"
+            "_Powered by Trends MCP · https://www.trendsmcp.ai_",
+        )
+        save_state(state)  # persist whatever we managed to see before hitting the cap
+        return 0  # exit clean so the daily workflow doesn't look broken
     print(f"\nDetected {len(events)} event(s); used ~{client.calls_made} API request(s) this run.")
 
     dispatch(events)

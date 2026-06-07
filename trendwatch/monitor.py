@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from datetime import date
 from typing import Any
 
-from .client import TrendsClient
+from .client import RateLimited, TrendsClient
 from .config import Config
 
 
@@ -38,6 +38,8 @@ def check_watchlist(client: TrendsClient, cfg: Config) -> list[Event]:
         for source in item.sources:
             try:
                 resp = client.get_growth(source, item.keyword, periods)
+            except RateLimited:
+                raise  # quota hit: stop and let the runner send the upgrade nudge
             except Exception as exc:  # one bad keyword shouldn't kill the run
                 print(f"  ! growth failed for '{item.keyword}' [{source}]: {exc}")
                 continue
@@ -91,6 +93,8 @@ def run_monitor(client: TrendsClient, cfg: Config, state: dict[str, Any]) -> tup
     for feed in cfg.discovery_feeds:
         try:
             resp = client.get_top_trends(feed, limit=cfg.discovery_limit)
+        except RateLimited:
+            raise  # quota hit: stop and let the runner send the upgrade nudge
         except Exception as exc:
             print(f"  ! top_trends failed for '{feed}': {exc}")
             continue

@@ -1,4 +1,4 @@
-"""Load and validate config.yml — the single file forkers edit."""
+"""Load and validate config.yml - the single file forkers edit."""
 from __future__ import annotations
 
 import os

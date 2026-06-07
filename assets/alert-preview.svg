@@ -24,5 +24,5 @@
   <text x="68" y="230" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#3fb950" font-weight="700">+386% over 7D <tspan fill="#949ba4" font-weight="400">(1M +278%, 3M +143%)</tspan></text>
 
   <line x1="44" y1="250" x2="596" y2="250" stroke="#3f4147" stroke-width="1"/>
-  <text x="44" y="272" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#949ba4" font-style="italic">Powered by Trends MCP — trendsmcp.ai</text>
+  <text x="44" y="272" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#949ba4" font-style="italic">Powered by Trends MCP · trendsmcp.ai</text>
 </svg>

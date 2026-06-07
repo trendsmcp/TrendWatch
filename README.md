@@ -1,7 +1,8 @@
 <div align="center">
 
-<img width="920" height="251" alt="image" src="https://github.com/user-attachments/assets/c7b30978-e49e-4f8c-b470-78d643451387" />
+<img src="assets/banner.svg" alt="TrendWatch - free trend monitoring & breakout alerts" width="100%">
 
+# 📈 TrendWatch
 
 ### Get pinged the moment a topic starts blowing up - Google, TikTok, YouTube, Reddit, Amazon & more.
 
@@ -19,13 +20,22 @@ Fork it → add one free key → pick your keywords → GitHub Actions watches t
 ![Runs on GitHub Actions](https://img.shields.io/badge/runs%20on-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
 ![No scraping](https://img.shields.io/badge/no%20scraping-✓-success)
 
+**Alerts to:**
+[![Slack](https://img.shields.io/badge/Slack-✓-4A154B?logo=slack&logoColor=white)](#-notification-channels)
+[![Discord](https://img.shields.io/badge/Discord-✓-5865F2?logo=discord&logoColor=white)](#-notification-channels)
+[![Telegram](https://img.shields.io/badge/Telegram-✓-26A5E4?logo=telegram&logoColor=white)](#-notification-channels)
+[![Email](https://img.shields.io/badge/Email-✓-EA4335?logo=gmail&logoColor=white)](#-notification-channels)
+[![Webhook](https://img.shields.io/badge/Webhook-✓-7B61FF?logo=zapier&logoColor=white)](#-notification-channels)
+
+**Data by** [![Trends MCP](https://img.shields.io/badge/Trends%20MCP-2ecf8e?logo=anthropic&logoColor=white)](https://www.trendsmcp.ai) · works with any MCP client (Claude, Cursor…)
+
 </div>
 
 ---
 
 <!--TRENDWATCH:START-->
 
-### 📊 Live trends — updated 2026-06-07 17:47 UTC
+### 📊 Live trends - updated 2026-06-07 16:51 UTC
 
 **🔝 Google Trends right now**
 
@@ -39,7 +49,7 @@ Fork it → add one free key → pick your keywords → GitHub Actions watches t
 
 ## Why TrendWatch?
 
-You want to know **when** "your brand", a competitor, or a whole category starts trending — *before* everyone else does. The usual options are bad:
+You want to know **when** "your brand", a competitor, or a whole category starts trending - *before* everyone else does. The usual options are bad:
 
 - 🧱 **Building a scraper** → breaks every time Google changes its HTML, needs a server, gets you rate-limited/blocked.
 - 💸 **Enterprise trend tools** → $100s/month, overkill, locked behind sales calls.
@@ -56,7 +66,7 @@ You want to know **when** "your brand", a competitor, or a whole category starts
    └────────────────────┘   └──────────────────────┘   │ ✉️ Email / Webhook│
      config.yml               (1 clean API call)         └──────────────────┘
               ▲
-        GitHub Actions runs this on a schedule — for free.
+        GitHub Actions runs this on a schedule - for free.
 ```
 
 ---
@@ -67,7 +77,7 @@ You want to know **when** "your brand", a competitor, or a whole category starts
 2. **[Grab a free API key](https://trendsmcp.ai)** (100 requests/month, no credit card).
 3. In *your* repo: **Settings → Secrets and variables → Actions → New repository secret**
    - Name: `TRENDS_API_KEY`  ·  Value: *(your key)*
-4. **Edit [`config.yml`](config.yml)** — add the keywords you care about.
+4. **Edit [`config.yml`](config.yml)** - add the keywords you care about.
 5. Go to the **Actions** tab, enable workflows, and hit **Run workflow** to test it.
 
 That's it. It now runs on a schedule and alerts you. 🎉
@@ -82,10 +92,10 @@ That's it. It now runs on a schedule and alerts you. 🎉
 <img src="assets/alert-preview.svg" alt="Example TrendWatch alert in Discord" width="540">
 </div>
 
-**1. Watchlist breakouts** — your keywords, measured for momentum.
+**1. Watchlist breakouts** - your keywords, measured for momentum.
 > 🚀 **labubu** is breaking out on google search: **+212%** over 7D  (1M +140%, 3M +320%)
 
-**2. Newly trending** — anything fresh that hits the live leaderboards (with an optional interest filter).
+**2. Newly trending** - anything fresh that hits the live leaderboards (with an optional interest filter).
 > 🆕 **project hail mary** just entered Google Trends (#2)
 
 Both land in the same alert, get written to [`reports/`](reports/) as dated Markdown, and refresh the live dashboard at the top of this README.
@@ -102,7 +112,7 @@ Both land in the same alert, get written to [`reports/`](reports/) as dated Mark
 | **Email** | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_TO` | Any SMTP (Gmail app password, Fastmail…) |
 | **Anything else** | `GENERIC_WEBHOOK_URL` | Zapier / Make / n8n / your own endpoint |
 
-Set one, several, or none — each activates only when its secret is present.
+Set one, several, or none - each activates only when its secret is present.
 
 ---
 
@@ -132,7 +142,7 @@ Projected monthly usage by schedule:
   Want more keywords or hourly checks? Upgrade: https://trendsmcp.ai/pricing
 ```
 
-The default config (2 keywords + 1 feed, daily) lands at ~90/month — comfortably free. Need more? [Upgrade for more keywords, more sources, and hourly checks.](https://trendsmcp.ai/pricing)
+The default config (2 keywords + 1 feed, daily) lands at ~90/month - comfortably free. Need more? [Upgrade for more keywords, more sources, and hourly checks.](https://trendsmcp.ai/pricing)
 
 ---
 
@@ -155,19 +165,19 @@ python -m trendwatch quota  # see your monthly usage
 ## ❓ FAQ
 
 **Is this just a Google Trends scraper?**
-No. There's no scraping anywhere in this repo — it makes authenticated API calls to [Trends MCP](https://www.trendsmcp.ai), which returns clean, normalized (0–100) trend data across 15+ platforms. No fragile HTML parsing, no Playwright, no proxies, no getting blocked.
+No. There's no scraping anywhere in this repo - it makes authenticated API calls to [Trends MCP](https://www.trendsmcp.ai), which returns clean, normalized (0-100) trend data across 15+ platforms. No fragile HTML parsing, no Playwright, no proxies, no getting blocked.
 
 **Do I have to pay?**
 No. The free tier (100 req/month) covers daily monitoring of a small watchlist, which is what most people want. You only pay if you want more keywords, more sources, or higher frequency.
 
 **Will my API key leak if my repo is public?**
-No. Your key lives in GitHub **Secrets**, never in the code, and isn't exposed in logs or to forks of *your* repo. Everyone who uses TrendWatch brings their **own** key — there is no shared key in this template.
+No. Your key lives in GitHub **Secrets**, never in the code, and isn't exposed in logs or to forks of *your* repo. Everyone who uses TrendWatch brings their **own** key - there is no shared key in this template.
 
 **Where does the data come from?**
 From the Trends MCP API, which aggregates and normalizes signals from Google, YouTube, TikTok, Reddit, Amazon, Wikipedia, app stores, and more. See [trendsmcp.ai/docs](https://www.trendsmcp.ai/docs).
 
 **Can my AI agent use the same data?**
-Yes — Trends MCP is a [Model Context Protocol](https://modelcontextprotocol.io) server, so Claude, Cursor, and other MCP clients can query trends directly. TrendWatch is the "set-and-forget alerts" companion to that. See the [docs](https://www.trendsmcp.ai/docs).
+Yes - Trends MCP is a [Model Context Protocol](https://modelcontextprotocol.io) server, so Claude, Cursor, and other MCP clients can query trends directly. TrendWatch is the "set-and-forget alerts" companion to that. See the [docs](https://www.trendsmcp.ai/docs).
 
 ---
 
@@ -183,7 +193,7 @@ If TrendWatch is useful to you, a star helps others find it 🙏
 
 ## 🤝 Contributing
 
-PRs welcome — new notification channels, smarter detection, nicer reports. See [CONTRIBUTING.md](CONTRIBUTING.md).
+PRs welcome - new notification channels, smarter detection, nicer reports. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## ⭐ Like it?
 
@@ -193,7 +203,7 @@ PRs welcome — new notification channels, smarter detection, nicer reports. See
 
 <div align="center">
 
-Built with [Trends MCP](https://www.trendsmcp.ai) — live trend data for AI assistants, agents & automations.
+Built with [Trends MCP](https://www.trendsmcp.ai) - live trend data for AI assistants, agents & automations.
 
 <sub>TrendWatch is an open-source community project. It is not affiliated with, endorsed by, or sponsored by Google, TikTok, Reddit, Amazon, or any other platform named above. All trademarks belong to their respective owners.</sub>
 

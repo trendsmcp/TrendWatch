@@ -2,7 +2,7 @@
 
 Every call goes to a single endpoint (POST https://api.trendsmcp.ai/api) and is
 authenticated with your personal API key via a Bearer token. The key is read
-from the TRENDS_API_KEY environment variable (a GitHub Secret in CI) — it is
+from the TRENDS_API_KEY environment variable (a GitHub Secret in CI) - it is
 never stored in this repo.
 
 Get a free key (100 requests/month, no credit card): https://trendsmcp.ai
@@ -25,7 +25,7 @@ class TrendsError(RuntimeError):
 
 
 class RateLimited(TrendsError):
-    """Raised on HTTP 429 — the monthly free-tier quota is exhausted."""
+    """Raised on HTTP 429 - the monthly free-tier quota is exhausted."""
 
 
 class MissingKey(TrendsError):
