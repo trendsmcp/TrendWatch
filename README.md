@@ -22,9 +22,16 @@ Fork it → add one free key → pick your keywords → GitHub Actions watches t
 
 <!--TRENDWATCH:START-->
 
-### 📊 Live trends — updated on every run
+### 📊 Live trends — updated 2026-06-07 16:45 UTC
 
-_Once you enable the workflow, this block auto-updates with your watchlist breakouts and a live leaderboard. (This is what visitors see first — it makes your fork a living dashboard.)_
+**🚀 Breakouts on the watchlist**
+
+- 🚀 **love island** is breaking out on google search: +388% over 7D  (1M +730%, 3M +822%)
+- 🚀 **god of war** is breaking out on google search: +386% over 7D  (1M +278%, 3M +143%)
+
+**🔝 Google Trends right now**
+
+`james handy` · `california election results` · `la mayor race` · `doodle for google` · `anthony head` · `bitcoin price` · `god of war laufey` · `love island voting` · `scott pelley` · `masters of the universe`
 
 <sub>Auto-updated by TrendWatch · powered by [Trends MCP](https://www.trendsmcp.ai)</sub>
 
