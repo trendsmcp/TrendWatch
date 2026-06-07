@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 🔑 Get a free Trends MCP API key
+    url: https://trendsmcp.ai
+    about: TrendWatch needs a free API key (100 requests/month, no credit card).
+  - name: 📚 Trends MCP API docs
+    url: https://www.trendsmcp.ai/docs
+    about: Full list of sources, feeds, and parameters.

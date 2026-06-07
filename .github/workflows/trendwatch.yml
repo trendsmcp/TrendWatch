@@ -1,0 +1,64 @@
+name: TrendWatch
+
+# ─────────────────────────────────────────────────────────────────────────
+# Runs on a schedule (free GitHub Actions minutes) and on-demand.
+# Edit the cron below to change how often trends are checked.
+#   "0 13 * * *"     = once a day at 13:00 UTC   (~90 req/mo with 3 calls/run)
+#   "0 */12 * * *"   = every 12 hours
+#   "0 9 * * 1-5"    = weekday mornings (09:00 UTC)
+# Mind the free tier: 100 requests/month. Run `python -m trendwatch quota`.
+# ─────────────────────────────────────────────────────────────────────────
+on:
+  schedule:
+    - cron: "0 13 * * *"
+  workflow_dispatch: {}        # lets you run it manually from the Actions tab
+
+permissions:
+  contents: write              # so it can commit state + reports back
+
+concurrency:
+  group: trendwatch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Run TrendWatch
+        env:
+          # Required — your free key from https://trendsmcp.ai
+          TRENDS_API_KEY: ${{ secrets.TRENDS_API_KEY }}
+          # Optional notification channels — add only the ones you use:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_TO: ${{ secrets.SMTP_TO }}
+          GENERIC_WEBHOOK_URL: ${{ secrets.GENERIC_WEBHOOK_URL }}
+        run: python -m trendwatch run
+
+      - name: Commit state & reports
+        if: ${{ always() }}
+        run: |
+          git config user.name "trendwatch-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A state reports README.md
+          if git diff --quiet --cached; then
+            echo "Nothing changed."
+          else
+            git commit -m "chore(trendwatch): update $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
