@@ -9,6 +9,7 @@ Get a free key (100 requests/month, no credit card): https://trendsmcp.ai
 """
 from __future__ import annotations
 
+import json
 import os
 import time
 from typing import Any
@@ -88,11 +89,42 @@ class TrendsClient:
 
             self.calls_made += 1
             try:
-                return resp.json()
+                data = resp.json()
             except ValueError as exc:
                 raise TrendsError(f"Non-JSON response: {resp.text[:200]}") from exc
+            return self._unwrap(data)
 
         raise TrendsError(f"Request failed after {self.retries + 1} attempts: {last_exc}")
+
+    @staticmethod
+    def _unwrap(data: Any) -> Any:
+        """Normalize the API's response.
+
+        Successful data calls come back as a Lambda-style envelope:
+            {"statusCode": 200, "body": "<json string>"}
+        while some errors arrive as plain JSON. Handle both, and surface an
+        error encoded inside the envelope (inner statusCode >= 400).
+        """
+        if isinstance(data, dict) and "statusCode" in data and "body" in data:
+            status = data.get("statusCode")
+            body = data.get("body")
+            if isinstance(body, str):
+                try:
+                    body = json.loads(body)
+                except ValueError:
+                    pass  # leave body as-is if it isn't JSON
+            if isinstance(status, int) and status >= 400:
+                msg = body.get("message") or body.get("error") if isinstance(body, dict) else str(body)
+                if status == 429:
+                    raise RateLimited(
+                        "Monthly free-tier quota (100 requests) exhausted. "
+                        "Trim config.yml, slow the schedule, or upgrade at " + SIGNUP_URL + "/pricing"
+                    )
+                if status == 401:
+                    raise MissingKey("API key was rejected. Check the TRENDS_API_KEY secret. " + SIGNUP_URL)
+                raise TrendsError(f"API error {status}: {msg}")
+            return body
+        return data
 
     # -- public API -------------------------------------------------------
     def get_trends(self, source: str, keyword: str, data_mode: str | None = None) -> list[dict]:

@@ -89,15 +89,24 @@ def cmd_check(args: argparse.Namespace) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="trendwatch", description="Free trend monitoring & breakout alerts.")
-    parser.add_argument("-c", "--config", default=None, help="path to config.yml")
+    # -c/--config is shared so it works both before AND after the subcommand
+    # (e.g. `trendwatch -c x.yml run` and `trendwatch run -c x.yml` both work).
+    base = argparse.ArgumentParser(add_help=False)
+    base.add_argument("-c", "--config", default=argparse.SUPPRESS, help="path to config.yml")
+
+    parser = argparse.ArgumentParser(
+        prog="trendwatch",
+        description="Free trend monitoring & breakout alerts.",
+        parents=[base],
+    )
     sub = parser.add_subparsers(dest="command")
-    sub.add_parser("run", help="check trends and send alerts").set_defaults(func=cmd_run)
-    sub.add_parser("quota", help="estimate monthly API usage").set_defaults(func=cmd_quota)
-    sub.add_parser("test", help="send a test alert to all configured channels").set_defaults(func=cmd_test)
-    sub.add_parser("check", help="validate config + API key").set_defaults(func=cmd_check)
+    sub.add_parser("run", help="check trends and send alerts", parents=[base]).set_defaults(func=cmd_run)
+    sub.add_parser("quota", help="estimate monthly API usage", parents=[base]).set_defaults(func=cmd_quota)
+    sub.add_parser("test", help="send a test alert to all configured channels", parents=[base]).set_defaults(func=cmd_test)
+    sub.add_parser("check", help="validate config + API key", parents=[base]).set_defaults(func=cmd_check)
 
     args = parser.parse_args(argv)
+    args.config = getattr(args, "config", None)
     if not getattr(args, "func", None):
         args.func = cmd_run  # default to run
 
