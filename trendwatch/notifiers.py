@@ -31,25 +31,14 @@ def _md_to_plain(text: str) -> str:
 
 
 def _build_summary(events: list[Event]) -> tuple[str, str]:
-    """Return (heading, body_markdown) for a batch of events."""
+    """Return (heading, body_markdown) for a batch of breakout events."""
     breakouts = [e for e in events if e.kind == "breakout"]
-    trending = [e for e in events if e.kind == "trending"]
-    parts = []
-    if breakouts:
-        parts.append(f"{len(breakouts)} breakout(s)")
-    if trending:
-        parts.append(f"{len(trending)} newly trending")
-    heading = "📊 TrendWatch: " + ", ".join(parts) if parts else "📊 TrendWatch"
+    heading = f"📊 TrendWatch: {len(breakouts)} breakout(s)" if breakouts else "📊 TrendWatch"
 
     lines = []
     if breakouts:
         lines.append("*Breakouts on your watchlist*")
         lines.extend(f"• {e.detail}" for e in breakouts)
-    if trending:
-        if lines:
-            lines.append("")
-        lines.append("*Newly trending*")
-        lines.extend(f"• {e.detail}" for e in trending[:25])
     lines.append("")
     lines.append("_Powered by Trends MCP · https://www.trendsmcp.ai_")
     return heading, "\n".join(lines)

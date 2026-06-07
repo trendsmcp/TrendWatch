@@ -35,13 +35,11 @@ Fork it → add one free key → pick your keywords → GitHub Actions watches t
 
 <!--TRENDWATCH:START-->
 
-### 📊 Live trends - updated 2026-06-07 18:10 UTC
+### 📊 Live trends - updated 2026-06-07 19:05 UTC
 
 <img src="reports/latest.svg" alt="Latest TrendWatch trends" width="600">
 
-**🔝 Google Trends right now**
-
-`james handy` · `california election results` · `la mayor race` · `doodle for google` · `anthony head` · `bitcoin price` · `god of war laufey` · `love island voting` · `scott pelley` · `masters of the universe`
+_All quiet - no watchlist breakouts in the latest run._
 
 <sub>Auto-updated by TrendWatch · powered by [Trends MCP](https://www.trendsmcp.ai)</sub>
 
@@ -94,13 +92,10 @@ That's it. It now runs on a schedule and alerts you. 🎉
 <img src="assets/alert-preview.svg" alt="Example TrendWatch alert in Discord" width="540">
 </div>
 
-**1. Watchlist breakouts** - your keywords, measured for momentum.
+**Watchlist breakouts** - your keywords, measured for momentum.
 > 🚀 **labubu** is breaking out on google search: **+212%** over 7D  (1M +140%, 3M +320%)
 
-**2. Newly trending** - anything fresh that hits the live leaderboards (with an optional interest filter).
-> 🆕 **project hail mary** just entered Google Trends (#2)
-
-Both land in the same alert, get written to [`reports/`](reports/) as dated Markdown, and refresh the live dashboard at the top of this README.
+Breakouts land in your alert channels, get written to [`reports/`](reports/) as dated Markdown, and refresh the live dashboard at the top of this README.
 
 ---
 
@@ -123,28 +118,25 @@ Set one, several, or none - each activates only when its secret is present.
 **Keyword momentum** (watchlist):
 `google search` · `google images` · `google news` · `google shopping` · `youtube` · `tiktok` · `reddit` · `amazon` · `wikipedia` · `news volume` · `news sentiment` · `app downloads` · `npm` · `steam`
 
-**Live leaderboards** (discovery):
-`Google Trends` · `TikTok Trending Hashtags` · `YouTube Trending` · `Reddit Hot Posts` · `Amazon Best Sellers` · `App Store Top Free/Paid` · `Google News` · `Spotify Top Podcasts` · `Wikipedia Trending` · `X (Twitter) Trending` · `GitHub Trending Repos` · and more.
-
 ---
 
 ## 🧮 Staying inside the free tier
 
-The free key gives you **100 requests/month**. TrendWatch spends **1 request per (keyword × source)** and **1 per leaderboard feed**, per run. Check your exact math anytime:
+The free key gives you **100 requests/month**. TrendWatch spends **1 request per (keyword × source)** per run. Check your exact math anytime:
 
 ```bash
 python -m trendwatch quota
 ```
 ```
-Total per run           : 3 request(s)
+Total per run           : 2 request(s)
 Projected monthly usage by schedule:
-  daily            ~  90 req/mo  [OK ]
-  every 12 hours   ~ 180 req/mo  [OVER]
+  daily            ~  60 req/mo  [OK ]
+  every 12 hours   ~ 120 req/mo  [OVER]
 ✓ On the free tier you can run up to: daily.
   Want more keywords or hourly checks? Upgrade: https://trendsmcp.ai/pricing
 ```
 
-The default config (2 keywords + 1 feed, daily) lands at ~90/month - comfortably free. Need more? [Upgrade for more keywords, more sources, and hourly checks.](https://trendsmcp.ai/pricing)
+The default config (2 keywords, daily) lands at ~60/month - comfortably free. Need more? [Upgrade for more keywords, more sources, and hourly checks.](https://trendsmcp.ai/pricing)
 
 ---
 

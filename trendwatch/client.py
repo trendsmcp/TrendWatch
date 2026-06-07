@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import json
 import os
-import time
 from typing import Any
 
 import requests
@@ -35,7 +34,7 @@ class MissingKey(TrendsError):
 class TrendsClient:
     """Minimal, dependency-light wrapper around the Trends MCP REST API."""
 
-    def __init__(self, api_key: str | None = None, *, timeout: int = 30, retries: int = 2):
+    def __init__(self, api_key: str | None = None, *, timeout: int = 30):
         self.api_key = api_key or os.environ.get("TRENDS_API_KEY", "").strip()
         if not self.api_key:
             raise MissingKey(
@@ -46,55 +45,46 @@ class TrendsClient:
                 "  3. Re-run the workflow."
             )
         self.timeout = timeout
-        self.retries = retries
         self.calls_made = 0  # rough local counter for quota awareness
 
     # -- low level --------------------------------------------------------
     def _post(self, payload: dict[str, Any]) -> Any:
+        """Make a single request. No retries: every attempt costs quota, so a
+        failed call fails fast rather than silently spending your free tier."""
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
             "User-Agent": "TrendWatch/1.0 (+https://github.com/topics/trendwatch)",
         }
-        last_exc: Exception | None = None
-        for attempt in range(self.retries + 1):
+        try:
+            resp = requests.post(API_URL, json=payload, headers=headers, timeout=self.timeout)
+        except requests.RequestException as exc:  # network blip
+            raise TrendsError(f"Network error: {exc}") from exc
+
+        if resp.status_code == 429:
+            raise RateLimited(
+                "Monthly free-tier quota (100 requests) exhausted. "
+                "Trim your config.yml, slow the schedule, or upgrade at " + SIGNUP_URL + "/pricing"
+            )
+        if resp.status_code == 401:
+            raise MissingKey(
+                "API key was rejected (HTTP 401). Double-check the TRENDS_API_KEY secret. "
+                "Get a fresh key at " + SIGNUP_URL
+            )
+        if resp.status_code >= 400:
             try:
-                resp = requests.post(API_URL, json=payload, headers=headers, timeout=self.timeout)
-            except requests.RequestException as exc:  # network blip
-                last_exc = exc
-                time.sleep(1.5 * (attempt + 1))
-                continue
+                body = resp.json()
+                msg = body.get("message") or body.get("error") or resp.text
+            except ValueError:
+                msg = resp.text
+            raise TrendsError(f"HTTP {resp.status_code}: {msg}")
 
-            if resp.status_code == 429:
-                raise RateLimited(
-                    "Monthly free-tier quota (100 requests) exhausted. "
-                    "Trim your config.yml, slow the schedule, or upgrade at " + SIGNUP_URL + "/pricing"
-                )
-            if resp.status_code == 401:
-                raise MissingKey(
-                    "API key was rejected (HTTP 401). Double-check the TRENDS_API_KEY secret. "
-                    "Get a fresh key at " + SIGNUP_URL
-                )
-            if resp.status_code >= 500:
-                last_exc = TrendsError(f"Server error {resp.status_code}: {resp.text[:200]}")
-                time.sleep(1.5 * (attempt + 1))
-                continue
-            if resp.status_code >= 400:
-                try:
-                    body = resp.json()
-                    msg = body.get("message") or body.get("error") or resp.text
-                except ValueError:
-                    msg = resp.text
-                raise TrendsError(f"HTTP {resp.status_code}: {msg}")
-
-            self.calls_made += 1
-            try:
-                data = resp.json()
-            except ValueError as exc:
-                raise TrendsError(f"Non-JSON response: {resp.text[:200]}") from exc
-            return self._unwrap(data)
-
-        raise TrendsError(f"Request failed after {self.retries + 1} attempts: {last_exc}")
+        self.calls_made += 1
+        try:
+            data = resp.json()
+        except ValueError as exc:
+            raise TrendsError(f"Non-JSON response: {resp.text[:200]}") from exc
+        return self._unwrap(data)
 
     @staticmethod
     def _unwrap(data: Any) -> Any:
@@ -143,11 +133,4 @@ class TrendsClient:
         }
         if data_mode:
             payload["data_mode"] = data_mode
-        return self._post(payload)
-
-    def get_top_trends(self, feed_type: str | None = None, limit: int = 25, offset: int = 0) -> dict:
-        """Live ranked leaderboard for a feed (Google Trends, TikTok, etc.)."""
-        payload: dict[str, Any] = {"mode": "top_trends", "limit": limit, "offset": offset}
-        if feed_type and feed_type.lower() != "all":
-            payload["type"] = feed_type
         return self._post(payload)

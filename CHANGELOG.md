@@ -2,6 +2,11 @@
 
 All notable changes to TrendWatch are documented here.
 
+## [1.1.0] - 2026-06-07
+### Changed
+- **Focused on keyword alerts.** Removed the top-trends / discovery leaderboard feature - TrendWatch now does one thing well: watch your keywords and alert on breakouts.
+- **Removed request retries.** Each API call is a single attempt now, so a failed call fails fast instead of quietly spending your free-tier quota.
+
 ## [1.0.0] - 2026-06-07
 ### Added
 - 🚀 First public release.

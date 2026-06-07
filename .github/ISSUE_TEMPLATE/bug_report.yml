@@ -35,5 +35,5 @@ body:
   - type: input
     id: config
     attributes:
-      label: config.yml (sources/feeds you used)
-      placeholder: "e.g. watchlist: nike (google search); discovery: Google Trends"
+      label: config.yml (keywords/sources you used)
+      placeholder: "e.g. watchlist: nike (google search), adidas (google search, tiktok)"

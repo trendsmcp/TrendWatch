@@ -31,18 +31,15 @@ def _esc(text: str, limit: int = 46) -> str:
     return html.escape(s, quote=True)
 
 
-def build_svg_card(events: list[Event], leaderboards: dict[str, list]) -> str:
+def build_svg_card(events: list[Event]) -> str:
     """Render a dependency-free, on-brand SVG 'trend card'.
 
     Renders as an image on GitHub and is easy to screenshot/share - every share
     is a tiny ad. No external libraries, so it runs anywhere CI does.
     """
-    breakouts = [e for e in events if e.kind == "breakout"][:5]
-    feed, names = (next(iter(leaderboards.items())) if leaderboards else ("", []))
-    board = names[:6]
+    breakouts = [e for e in events if e.kind == "breakout"][:8]
 
     W = 860
-    y = 92  # cursor after header
     rows: list[str] = []
 
     rows.append('<text x="40" y="132" font-size="17" font-weight="700" fill="#7fe9bf">'
@@ -64,16 +61,6 @@ def build_svg_card(events: list[Event], leaderboards: dict[str, list]) -> str:
         rows.append(f'<text x="44" y="{y}" font-size="18" fill="#8aa49a">'
                     f'All quiet - no watchlist breakouts this run.</text>')
         y += 34
-
-    y += 12
-    if board:
-        rows.append(f'<text x="40" y="{y}" font-size="17" font-weight="700" fill="#7fe9bf">'
-                    f'{_esc(feed.upper(), 40)} - TRENDING NOW</text>')
-        y += 28
-        for i, name in enumerate(board, start=1):
-            rows.append(f'<text x="44" y="{y}" font-size="18" fill="#6f857d">{i}</text>')
-            rows.append(f'<text x="74" y="{y}" font-size="18" fill="#dbe7e1">{_esc(name, 60)}</text>')
-            y += 30
 
     height = y + 56
     body = "\n  ".join(rows)
@@ -100,9 +87,8 @@ def build_svg_card(events: list[Event], leaderboards: dict[str, list]) -> str:
 '''
 
 
-def build_markdown(events: list[Event], leaderboards: dict[str, list]) -> str:
+def build_markdown(events: list[Event]) -> str:
     breakouts = [e for e in events if e.kind == "breakout"]
-    trending = [e for e in events if e.kind == "trending"]
 
     lines = [f"# 📊 TrendWatch report - {_now()}", ""]
 
@@ -112,23 +98,8 @@ def build_markdown(events: list[Event], leaderboards: dict[str, list]) -> str:
         for e in breakouts:
             lines.append(f"- {e.detail.replace('*', '**')}")
         lines.append("")
-
-    if trending:
-        lines.append("## 🆕 Newly trending")
-        lines.append("")
-        for e in trending:
-            lines.append(f"- {e.detail.replace('*', '**')}")
-        lines.append("")
-
-    if not breakouts and not trending:
-        lines.append("_No breakouts or new entrants since the last run. All quiet._")
-        lines.append("")
-
-    for feed, names in leaderboards.items():
-        lines.append(f"## 🔝 {feed} - top {len(names)}")
-        lines.append("")
-        for i, name in enumerate(names, start=1):
-            lines.append(f"{i}. {name}")
+    else:
+        lines.append("_No breakouts on your watchlist since the last run. All quiet._")
         lines.append("")
 
     lines.append("---")
@@ -145,17 +116,17 @@ def write_reports(markdown: str) -> None:
     print(f"  ✓ wrote {REPORTS_DIR / 'latest.md'} and {dated}")
 
 
-def write_svg_card(events: list[Event], leaderboards: dict[str, list]) -> None:
+def write_svg_card(events: list[Event]) -> None:
     """Write the shareable SVG trend card (latest + dated archive)."""
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    svg = build_svg_card(events, leaderboards)
+    svg = build_svg_card(events)
     CARD_PATH.write_text(svg, encoding="utf-8")
     dated = REPORTS_DIR / f"{datetime.now(timezone.utc):%Y-%m-%d}.svg"
     dated.write_text(svg, encoding="utf-8")
     print(f"  ✓ wrote {CARD_PATH} (shareable card)")
 
 
-def _readme_block(events: list[Event], leaderboards: dict[str, list]) -> str:
+def _readme_block(events: list[Event]) -> str:
     breakouts = [e for e in events if e.kind == "breakout"]
     lines = [README_START, "", f"### 📊 Live trends - updated {_now()}", ""]
     # shareable visual card first (renders as an image, easy to screenshot/share)
@@ -168,14 +139,8 @@ def _readme_block(events: list[Event], leaderboards: dict[str, list]) -> str:
         for e in breakouts:
             lines.append(f"- {e.detail.replace('*', '**')}")
         lines.append("")
-
-    # show one compact leaderboard so the README always has something live
-    if leaderboards:
-        feed, names = next(iter(leaderboards.items()))
-        top = names[:10]
-        lines.append(f"**🔝 {feed} right now**")
-        lines.append("")
-        lines.append(" · ".join(f"`{n}`" for n in top))
+    else:
+        lines.append("_All quiet - no watchlist breakouts in the latest run._")
         lines.append("")
 
     lines.append("<sub>Auto-updated by TrendWatch · powered by "
@@ -185,14 +150,14 @@ def _readme_block(events: list[Event], leaderboards: dict[str, list]) -> str:
     return "\n".join(lines)
 
 
-def update_readme(events: list[Event], leaderboards: dict[str, list]) -> None:
+def update_readme(events: list[Event]) -> None:
     if not README_PATH.exists():
         return
     content = README_PATH.read_text(encoding="utf-8")
     if README_START not in content or README_END not in content:
         print("  · README has no TRENDWATCH markers; skipping live-dashboard update.")
         return
-    block = _readme_block(events, leaderboards)
+    block = _readme_block(events)
     before = content.split(README_START)[0]
     after = content.split(README_END)[1]
     README_PATH.write_text(before + block + after, encoding="utf-8")

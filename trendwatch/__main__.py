@@ -39,7 +39,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     print(f"Channels: {', '.join(active) if active else 'console only (add a webhook secret to get notified)'}")
 
     try:
-        events, leaderboards = run_monitor(client, cfg, state)
+        events = run_monitor(client, cfg, state)
     except RateLimited as exc:
         # Don't fail silently: ping the user through their own channels and nudge an upgrade.
         print(f"\n⚠ Free-tier quota reached: {exc}")
@@ -58,12 +58,12 @@ def cmd_run(args: argparse.Namespace) -> int:
     dispatch(events)
 
     if cfg.write_markdown or cfg.update_readme:
-        write_svg_card(events, leaderboards)  # the shareable image (README embeds it)
-        markdown = build_markdown(events, leaderboards)
+        write_svg_card(events)  # the shareable image (README embeds it)
+        markdown = build_markdown(events)
         if cfg.write_markdown:
             write_reports(markdown)
         if cfg.update_readme:
-            update_readme(events, leaderboards)
+            update_readme(events)
 
     save_state(state)
     print("Done.")
@@ -83,7 +83,7 @@ def cmd_test(args: argparse.Namespace) -> int:
 
 def cmd_check(args: argparse.Namespace) -> int:
     cfg = load_config(args.config)
-    print(f"✓ config.yml parsed: {len(cfg.watchlist)} keyword(s), {len(cfg.discovery_feeds)} feed(s)")
+    print(f"✓ config.yml parsed: {len(cfg.watchlist)} keyword(s)")
     print(f"  Cost per run: {cfg.requests_per_run()} request(s)")
     try:
         client = TrendsClient()
@@ -92,7 +92,7 @@ def cmd_check(args: argparse.Namespace) -> int:
         return 1
     # one cheap live call to confirm the key works
     try:
-        client.get_top_trends("Google Trends", limit=1)
+        client.get_growth("google search", "apple", ["7D"])
         print("✓ API key works (live call succeeded)")
     except RateLimited as exc:
         print(f"✓ API key recognized but quota is exhausted: {exc}")
