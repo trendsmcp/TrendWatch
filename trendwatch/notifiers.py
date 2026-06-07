@@ -7,6 +7,7 @@ Nothing here ever raises: a broken channel logs a warning and the run continues.
 from __future__ import annotations
 
 import os
+import re
 import smtplib
 import ssl
 from email.mime.text import MIMEText
@@ -16,6 +17,13 @@ import requests
 from .monitor import Event
 
 TIMEOUT = 15
+
+_URL_RE = re.compile(r"https?://\S+")
+
+
+def _redact(text: str) -> str:
+    """Strip URLs (which may embed webhook secrets / bot tokens) from log output."""
+    return _URL_RE.sub("[redacted-url]", str(text))
 
 
 def _md_to_plain(text: str) -> str:
@@ -164,7 +172,7 @@ def _send_all(heading: str, body: str, events: list[Event]) -> None:
         try:
             fn(heading, body, events)
         except Exception as exc:  # never let one channel break the others
-            print(f"  ! {name} notification failed: {exc}")
+            print(f"  ! {name} notification failed: {_redact(exc)}")
 
 
 def dispatch(events: list[Event]) -> None:
