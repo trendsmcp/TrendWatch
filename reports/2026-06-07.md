@@ -1,9 +1,6 @@
-# 📊 TrendWatch report — 2026-06-07 16:45 UTC
+# 📊 TrendWatch report — 2026-06-07 16:48 UTC
 
-## 🚀 Watchlist breakouts
-
-- 🚀 **love island** is breaking out on google search: +388% over 7D  (1M +730%, 3M +822%)
-- 🚀 **god of war** is breaking out on google search: +386% over 7D  (1M +278%, 3M +143%)
+_No breakouts or new entrants since the last run. All quiet._
 
 ## 🔝 Google Trends — top 25
 

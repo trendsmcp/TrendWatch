@@ -22,12 +22,7 @@ Fork it → add one free key → pick your keywords → GitHub Actions watches t
 
 <!--TRENDWATCH:START-->
 
-### 📊 Live trends — updated 2026-06-07 16:45 UTC
-
-**🚀 Breakouts on the watchlist**
-
-- 🚀 **love island** is breaking out on google search: +388% over 7D  (1M +730%, 3M +822%)
-- 🚀 **god of war** is breaking out on google search: +386% over 7D  (1M +278%, 3M +143%)
+### 📊 Live trends — updated 2026-06-07 16:48 UTC
 
 **🔝 Google Trends right now**
 
