@@ -3,8 +3,6 @@
 <img width="920" height="251" alt="image" src="https://github.com/user-attachments/assets/c7b30978-e49e-4f8c-b470-78d643451387" />
 
 
-# 📈 TrendWatch
-
 ### Get pinged the moment a topic starts blowing up — Google, TikTok, YouTube, Reddit, Amazon & more.
 
 **Free. Runs in your own GitHub repo. No server, no scraping, no API keys to juggle.**
