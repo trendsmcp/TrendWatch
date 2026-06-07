@@ -1,6 +1,7 @@
 <div align="center">
 
-<img src="assets/banner.svg" alt="TrendWatch — free trend monitoring & breakout alerts" width="100%">
+<img width="920" height="251" alt="image" src="https://github.com/user-attachments/assets/c7b30978-e49e-4f8c-b470-78d643451387" />
+
 
 # 📈 TrendWatch
 
