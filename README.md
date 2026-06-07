@@ -10,11 +10,11 @@
 
 Fork it → add one free key → pick your keywords → GitHub Actions watches the trends and DMs you when something breaks out.
 
-[![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge&logo=github)](https://github.com/trendsmcp/trendwatch/generate)
+[![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge&logo=github)](https://github.com/trendsmcp/TrendWatch/generate)
 [![Get a free API key](https://img.shields.io/badge/Get%20a%20free%20key-trendsmcp.ai-blue?style=for-the-badge)](https://trendsmcp.ai)
 
-[![GitHub stars](https://img.shields.io/github/stars/trendsmcp/trendwatch?style=social)](https://github.com/trendsmcp/trendwatch/stargazers)
-![Last commit](https://img.shields.io/github/last-commit/trendsmcp/trendwatch)
+[![GitHub stars](https://img.shields.io/github/stars/trendsmcp/TrendWatch?style=social)](https://github.com/trendsmcp/TrendWatch/stargazers)
+![Last commit](https://img.shields.io/github/last-commit/trendsmcp/TrendWatch)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Runs on GitHub Actions](https://img.shields.io/badge/runs%20on-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
@@ -64,7 +64,7 @@ You want to know **when** "your brand", a competitor, or a whole category starts
 
 ## ⚡ 60-second setup
 
-1. **[Click "Use this template"](https://github.com/trendsmcp/trendwatch/generate)** → create your own copy of this repo.
+1. **[Click "Use this template"](https://github.com/trendsmcp/TrendWatch/generate)** → create your own copy of this repo.
 2. **[Grab a free API key](https://trendsmcp.ai)** (100 requests/month, no credit card).
 3. In *your* repo: **Settings → Secrets and variables → Actions → New repository secret**
    - Name: `TRENDS_API_KEY`  ·  Value: *(your key)*
@@ -176,8 +176,8 @@ Yes — Trends MCP is a [Model Context Protocol](https://modelcontextprotocol.io
 
 If TrendWatch is useful to you, a star helps others find it 🙏
 
-<a href="https://star-history.com/#trendsmcp/trendwatch&Date">
-  <img src="https://api.star-history.com/svg?repos=trendsmcp/trendwatch&type=Date" alt="Star History Chart" width="600">
+<a href="https://star-history.com/#trendsmcp/TrendWatch&Date">
+  <img src="https://api.star-history.com/svg?repos=trendsmcp/TrendWatch&type=Date" alt="Star History Chart" width="600">
 </a>
 
 ---
@@ -188,7 +188,7 @@ PRs welcome — new notification channels, smarter detection, nicer reports. See
 
 ## ⭐ Like it?
 
-**[Star this repo](https://github.com/trendsmcp/trendwatch)** so others can find it, and **[Use this template](https://github.com/trendsmcp/trendwatch/generate)** to spin up your own trend radar in a minute.
+**[Star this repo](https://github.com/trendsmcp/TrendWatch)** so others can find it, and **[Use this template](https://github.com/trendsmcp/TrendWatch/generate)** to spin up your own trend radar in a minute.
 
 ---
 

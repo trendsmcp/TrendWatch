@@ -22,7 +22,7 @@ dependencies = [
 [project.urls]
 Homepage = "https://www.trendsmcp.ai"
 Documentation = "https://www.trendsmcp.ai/docs"
-Repository = "https://github.com/trendsmcp/trendwatch"
+Repository = "https://github.com/trendsmcp/TrendWatch"
 
 [project.scripts]
 trendwatch = "trendwatch.__main__:main"
