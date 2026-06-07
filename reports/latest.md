@@ -1,8 +1,8 @@
-# 📊 TrendWatch report — 2026-06-07 17:47 UTC
+# 📊 TrendWatch report - 2026-06-07 17:49 UTC
 
 _No breakouts or new entrants since the last run. All quiet._
 
-## 🔝 Google Trends — top 25
+## 🔝 Google Trends - top 25
 
 1. james handy
 2. california election results
