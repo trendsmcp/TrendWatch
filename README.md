@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/banner.svg" alt="TrendWatch — free trend monitoring & breakout alerts" width="100%">
+
 # 📈 TrendWatch
 
 ### Get pinged the moment a topic starts blowing up — Google, TikTok, YouTube, Reddit, Amazon & more.
@@ -11,6 +13,8 @@ Fork it → add one free key → pick your keywords → GitHub Actions watches t
 [![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge&logo=github)](https://github.com/trendsmcp/trendwatch/generate)
 [![Get a free API key](https://img.shields.io/badge/Get%20a%20free%20key-trendsmcp.ai-blue?style=for-the-badge)](https://trendsmcp.ai)
 
+[![GitHub stars](https://img.shields.io/github/stars/trendsmcp/trendwatch?style=social)](https://github.com/trendsmcp/trendwatch/stargazers)
+![Last commit](https://img.shields.io/github/last-commit/trendsmcp/trendwatch)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Runs on GitHub Actions](https://img.shields.io/badge/runs%20on-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
@@ -74,6 +78,10 @@ That's it. It now runs on a schedule and alerts you. 🎉
 ---
 
 ## 🎯 What it detects
+
+<div align="center">
+<img src="assets/alert-preview.svg" alt="Example TrendWatch alert in Discord" width="540">
+</div>
 
 **1. Watchlist breakouts** — your keywords, measured for momentum.
 > 🚀 **labubu** is breaking out on google search: **+212%** over 7D  (1M +140%, 3M +320%)
@@ -161,6 +169,16 @@ From the Trends MCP API, which aggregates and normalizes signals from Google, Yo
 
 **Can my AI agent use the same data?**
 Yes — Trends MCP is a [Model Context Protocol](https://modelcontextprotocol.io) server, so Claude, Cursor, and other MCP clients can query trends directly. TrendWatch is the "set-and-forget alerts" companion to that. See the [docs](https://www.trendsmcp.ai/docs).
+
+---
+
+## 📈 Star history
+
+If TrendWatch is useful to you, a star helps others find it 🙏
+
+<a href="https://star-history.com/#trendsmcp/trendwatch&Date">
+  <img src="https://api.star-history.com/svg?repos=trendsmcp/trendwatch&type=Date" alt="Star History Chart" width="600">
+</a>
 
 ---
 

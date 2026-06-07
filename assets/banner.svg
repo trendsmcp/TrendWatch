@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="TrendWatch — free trend monitoring and breakout alerts">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2ea043"/>
+      <stop offset="1" stop-color="#3fb950"/>
+    </linearGradient>
+    <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2ea043" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#2ea043" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="360" rx="16" fill="url(#bg)"/>
+
+  <!-- rising trend chart -->
+  <path d="M60 280 L180 270 L300 255 L420 250 L540 225 L660 215 L780 170 L900 150 L1020 80 L1140 40"
+        fill="none" stroke="url(#line)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M60 280 L180 270 L300 255 L420 250 L540 225 L660 215 L780 170 L900 150 L1020 80 L1140 40 L1140 320 L60 320 Z"
+        fill="url(#fill)"/>
+  <circle cx="1140" cy="40" r="8" fill="#3fb950"/>
+
+  <!-- title -->
+  <text x="60" y="110" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="68" font-weight="800" fill="#f0f6fc">📈 TrendWatch</text>
+  <text x="62" y="158" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="27" font-weight="600" fill="#adbac7">Get pinged the moment a topic starts blowing up.</text>
+  <text x="62" y="194" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" fill="#768390">Google · TikTok · YouTube · Reddit · Amazon — alerts to Slack / Discord / Telegram / email.</text>
+
+  <!-- chips -->
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="600">
+    <rect x="62" y="232" width="150" height="40" rx="20" fill="#1f6feb"/>
+    <text x="137" y="258" fill="#ffffff" text-anchor="middle">100% free</text>
+    <rect x="224" y="232" width="160" height="40" rx="20" fill="#238636"/>
+    <text x="304" y="258" fill="#ffffff" text-anchor="middle">No scraping</text>
+    <rect x="396" y="232" width="230" height="40" rx="20" fill="#30363d"/>
+    <text x="511" y="258" fill="#e6edf3" text-anchor="middle">Runs on GitHub Actions</text>
+  </g>
+
+  <text x="62" y="318" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" fill="#636e7b">Powered by Trends MCP · trendsmcp.ai</text>
+</svg>

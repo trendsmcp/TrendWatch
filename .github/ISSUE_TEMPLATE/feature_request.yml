@@ -1,0 +1,22 @@
+name: 💡 Feature request
+description: Suggest a new channel, source, or capability
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like?
+      description: e.g. a new notification channel (Teams, ntfy, Pushover), a new data source, smarter detection, nicer reports…
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why is it useful?
+      description: What does it let you do that you can't today?
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I'd be willing to open a PR for this

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="300" viewBox="0 0 640 300" role="img" aria-label="Example TrendWatch alert">
+  <rect width="640" height="300" rx="12" fill="#313338"/>
+  <!-- left accent bar (Discord embed style) -->
+  <rect x="16" y="16" width="608" height="268" rx="8" fill="#2b2d31"/>
+  <rect x="16" y="16" width="5" height="268" rx="2.5" fill="#3fb950"/>
+
+  <!-- bot identity -->
+  <circle cx="50" cy="48" r="16" fill="#1f6feb"/>
+  <text x="50" y="54" font-family="Segoe UI, Arial, sans-serif" font-size="18" text-anchor="middle" fill="#fff">📈</text>
+  <text x="78" y="46" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#f2f3f5">TrendWatch</text>
+  <rect x="188" y="34" width="42" height="17" rx="4" fill="#5865f2"/>
+  <text x="209" y="46" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">BOT</text>
+  <text x="244" y="46" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#949ba4">today at 1:00 PM</text>
+
+  <!-- heading -->
+  <text x="44" y="92" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#f2f3f5">📊 TrendWatch: 2 breakouts</text>
+
+  <text x="44" y="126" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#b5bac1">BREAKOUTS ON YOUR WATCHLIST</text>
+
+  <text x="44" y="156" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#dbdee1">🚀 <tspan font-weight="700" fill="#f2f3f5">love island</tspan> is breaking out on google search:</text>
+  <text x="68" y="178" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#3fb950" font-weight="700">+388% over 7D <tspan fill="#949ba4" font-weight="400">(1M +730%, 3M +822%)</tspan></text>
+
+  <text x="44" y="208" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#dbdee1">🚀 <tspan font-weight="700" fill="#f2f3f5">god of war</tspan> is breaking out on google search:</text>
+  <text x="68" y="230" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#3fb950" font-weight="700">+386% over 7D <tspan fill="#949ba4" font-weight="400">(1M +278%, 3M +143%)</tspan></text>
+
+  <line x1="44" y1="250" x2="596" y2="250" stroke="#3f4147" stroke-width="1"/>
+  <text x="44" y="272" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#949ba4" font-style="italic">Powered by Trends MCP — trendsmcp.ai</text>
+</svg>

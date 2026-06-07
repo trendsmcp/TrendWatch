@@ -1,0 +1,35 @@
+[project]
+name = "trendwatch"
+version = "1.0.0"
+description = "Free trend monitoring & breakout alerts that run in your own GitHub repo. Powered by Trends MCP."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Trends MCP", email = "hello@trendsmcp.ai" }]
+keywords = ["trends", "trend-monitoring", "google-trends", "mcp", "alerts", "github-actions", "market-research", "seo"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Internet :: WWW/HTTP",
+]
+dependencies = [
+    "requests>=2.31",
+    "PyYAML>=6.0",
+]
+
+[project.urls]
+Homepage = "https://www.trendsmcp.ai"
+Documentation = "https://www.trendsmcp.ai/docs"
+Repository = "https://github.com/trendsmcp/trendwatch"
+
+[project.scripts]
+trendwatch = "trendwatch.__main__:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["trendwatch"]
