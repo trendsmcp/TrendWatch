@@ -7,9 +7,9 @@
 #    Each (keyword × source) costs 1 API request per run. Keep it lean on the
 #    free tier (100 req/month). Run `python -m trendwatch quota` to see the math.
 watchlist:
-  - keyword: "love island"
+  - keyword: "your brand or product"
     sources: ["google search"]
-  - keyword: "god of war"
+  - keyword: "a competitor"
     sources: ["google search"]
   # More examples (uncomment / edit):
   # - keyword: "ozempic"
@@ -25,7 +25,7 @@ watchlist:
 # 2) BREAKOUT detection — when does a watched keyword count as "breaking out"?
 breakout:
   period: "7D"            # window to measure growth over (7D, 14D, 30D, 1M, 3M, ...)
-  threshold_pct: 20       # alert when growth over `period` is >= this %
+  threshold_pct: 50       # alert when growth over `period` is >= this %
   also_periods: ["1M", "3M"]   # shown for context in the alert (no extra quota)
 
 # 3) DISCOVERY — watch live leaderboards and ping you when something NEW appears.
