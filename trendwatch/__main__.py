@@ -25,7 +25,7 @@ from .config import load_config
 from .monitor import run_monitor
 from .notifiers import configured_channels, dispatch, send_notice, send_test
 from .quota import print_report
-from .report import build_markdown, update_readme, write_reports
+from .report import build_markdown, update_readme, write_reports, write_svg_card
 from .state import load_state, save_state
 
 
@@ -58,6 +58,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     dispatch(events)
 
     if cfg.write_markdown or cfg.update_readme:
+        write_svg_card(events, leaderboards)  # the shareable image (README embeds it)
         markdown = build_markdown(events, leaderboards)
         if cfg.write_markdown:
             write_reports(markdown)
