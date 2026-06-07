@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrendWatch · Free trend alerts in your own GitHub repo · Trends MCP</title>
+<meta name="description" content="TrendWatch is a free, open-source trend monitor that runs in your own GitHub repo. Get pinged on Slack, Discord, Telegram or email the moment a keyword breaks out across Google, TikTok, YouTube, Reddit and Amazon. Powered by Trends MCP.">
+<meta property="og:title" content="TrendWatch · Free trend alerts in your own GitHub repo">
+<meta property="og:description" content="Get pinged the moment a topic starts blowing up. Free, no server, no scraping. Powered by Trends MCP.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#040e09; --panel:#0a1a12; --panel2:#0c2018; --green:#2ecf8e; --green2:#5be5a8;
+    --text:#e8f3ee; --muted:#8aa49a; --border:#173a2a;
+    --radius:16px; --maxw:1080px;
+  }
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,#08251a 0%,var(--bg) 55%);
+    color:var(--text);font-family:'Segoe UI',-apple-system,Helvetica,Arial,sans-serif;line-height:1.55}
+  a{color:var(--green2);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  header{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:22px}
+  .brand svg{width:34px;height:34px}
+  .btn{display:inline-block;padding:12px 20px;border-radius:999px;font-weight:700;font-size:15px;border:1.5px solid transparent;cursor:pointer}
+  .btn-primary{background:var(--green);color:#04140d}
+  .btn-primary:hover{background:var(--green2);text-decoration:none}
+  .btn-ghost{border-color:var(--border);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--green);text-decoration:none}
+  .hero{text-align:center;padding:56px 0 30px}
+  .hero h1{font-size:clamp(38px,6vw,68px);line-height:1.05;margin:.2em 0;font-weight:800;letter-spacing:-.02em}
+  .hero .grad{background:linear-gradient(90deg,var(--green),var(--green2),#b8f5d8);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.lead{font-size:clamp(17px,2.4vw,22px);color:var(--muted);max-width:680px;margin:14px auto 8px}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0 26px}
+  .chip{font-size:13px;font-weight:700;padding:7px 14px;border-radius:999px;background:var(--panel2);border:1px solid var(--border);color:#cfeede}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+  .note{color:var(--muted);font-size:13px;margin-top:14px}
+  section{padding:46px 0}
+  h2{font-size:clamp(26px,3.4vw,36px);text-align:center;margin:0 0 8px;letter-spacing:-.01em}
+  .sub{text-align:center;color:var(--muted);max-width:640px;margin:0 auto 34px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+  .card .n{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border-radius:10px;background:var(--panel2);color:var(--green2);font-weight:800;margin-bottom:12px}
+  .card h3{margin:.2em 0 .4em;font-size:19px}
+  .card p{color:var(--muted);margin:0;font-size:15px}
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:26px}
+  .two{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center}
+  .tags{display:flex;gap:8px;flex-wrap:wrap}
+  .tag{font-size:13px;padding:6px 12px;border-radius:8px;background:var(--panel2);border:1px solid var(--border);color:#cfeede}
+  .alert{background:#2b2d31;border-radius:12px;padding:16px 18px;border-left:4px solid var(--green);font-size:15px}
+  .alert .b{font-weight:700}
+  .alert .g{color:var(--green2);font-weight:700}
+  .ctaband{background:linear-gradient(120deg,#0c2018,#08251a);border:1px solid var(--border);border-radius:22px;padding:44px;text-align:center}
+  footer{border-top:1px solid var(--border);margin-top:30px;padding:26px 0;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  code{background:#0c2018;padding:2px 7px;border-radius:6px;color:#cfeede;font-size:13px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="l" x1="2" y1="20" x2="22" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2ecf8e"/><stop offset="40%" stop-color="#5be5a8"/><stop offset="78%" stop-color="#b8f5d8"/><stop offset="100%" stop-color="#fff"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="#04130c"/><path d="M20.684 4.042A1.029 1.029 0 0 1 22 5.03l-.001 5.712a1.03 1.03 0 0 1-1.647.823L18.71 10.33l-4.18 5.568a1.647 1.647 0 0 1-2.155.428l-.15-.1-3.337-2.507-4.418 5.885c-.42.56-1.185.707-1.777.368l-.144-.095a1.372 1.372 0 0 1-.368-1.776l.095-.144 5.077-6.762a1.646 1.646 0 0 1 2.156-.428l.149.1 3.336 2.506 3.522-4.69-1.647-1.237a1.03 1.03 0 0 1 .194-1.76l.137-.05 5.485-1.595-.001.001z" fill="url(#l)"/></svg>
+      TrendWatch
+    </div>
+    <a class="btn btn-ghost" href="https://github.com/trendsmcp/TrendWatch">View on GitHub</a>
+  </header>
+
+  <section class="hero">
+    <h1>Get pinged the moment<br>a topic starts <span class="grad">blowing up</span>.</h1>
+    <p class="lead">A free, open-source trend monitor that runs in your own GitHub repo. Watch Google, TikTok, YouTube, Reddit and Amazon, and get alerted when a keyword breaks out.</p>
+    <div class="chips">
+      <span class="chip">100% free</span>
+      <span class="chip">No server</span>
+      <span class="chip">No scraping</span>
+      <span class="chip">Runs on GitHub Actions</span>
+      <span class="chip">Set up in 60 seconds</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://github.com/trendsmcp/TrendWatch/generate">Use this template &rarr;</a>
+      <a class="btn btn-ghost" href="https://trendsmcp.ai">Get a free API key</a>
+    </div>
+    <div class="note">100 requests/month free. No credit card.</div>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <p class="sub">No code to write. Copy the template, add one free key, pick your keywords, and forget about it.</p>
+    <div class="grid">
+      <div class="card"><span class="n">1</span><h3>Copy the template</h3><p>One click on <b>Use this template</b> creates your own private copy of the repo. Nothing to install.</p></div>
+      <div class="card"><span class="n">2</span><h3>Add your free key</h3><p>Grab a free Trends MCP key and paste it into your repo&rsquo;s encrypted Secrets. Then list the keywords you care about.</p></div>
+      <div class="card"><span class="n">3</span><h3>Get alerted, automatically</h3><p>GitHub runs it on a schedule for free and pings you on Slack, Discord, Telegram or email when something spikes.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="panel two">
+      <div>
+        <h2 style="text-align:left;margin-bottom:10px">A real alert looks like this</h2>
+        <p style="color:var(--muted);margin-top:0">Breakouts on your watchlist plus anything newly trending, delivered to the app you already live in.</p>
+        <div class="alert">
+          <div>📊 <span class="b">TrendWatch: 2 breakouts</span></div>
+          <div style="margin-top:8px">🚀 <span class="b">love island</span> is breaking out on google search: <span class="g">+388% over 7D</span></div>
+          <div>🚀 <span class="b">god of war</span> is breaking out on google search: <span class="g">+386% over 7D</span></div>
+          <div style="margin-top:8px;color:#949ba4">🆕 <b>snail mucin</b> just entered Google Trends (#3)</div>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Watch across every platform</h3>
+        <div class="tags" style="margin-bottom:16px">
+          <span class="tag">Google</span><span class="tag">YouTube</span><span class="tag">TikTok</span><span class="tag">Reddit</span><span class="tag">Amazon</span><span class="tag">Wikipedia</span><span class="tag">App Store</span><span class="tag">npm</span><span class="tag">Steam</span>
+        </div>
+        <h3>Alert anywhere</h3>
+        <div class="tags">
+          <span class="tag">Slack</span><span class="tag">Discord</span><span class="tag">Telegram</span><span class="tag">Email</span><span class="tag">Webhook</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why not just&hellip;</h2>
+    <div class="grid">
+      <div class="card"><h3>&hellip;build a scraper?</h3><p>It breaks every time Google changes its HTML, needs a server, and gets you blocked. TrendWatch uses a clean API. No scraping.</p></div>
+      <div class="card"><h3>&hellip;pay for an enterprise tool?</h3><p>Hundreds a month, locked behind sales calls. TrendWatch is free and open source; you only pay if you outgrow the free tier.</p></div>
+      <div class="card"><h3>&hellip;check Google Trends by hand?</h3><p>You forget, you miss the spike, you&rsquo;re late. TrendWatch watches 24/7 and comes to you the moment momentum shifts.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="ctaband">
+      <h2 style="margin-bottom:6px">Start catching trends early</h2>
+      <p class="sub">Free to copy, free to run, free to get your key. Be the first to know, not the last.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/trendsmcp/TrendWatch/generate">Use this template &rarr;</a>
+        <a class="btn btn-ghost" href="https://trendsmcp.ai">Get a free API key</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Powered by <a href="https://www.trendsmcp.ai">Trends MCP</a> · live trend data for AI agents &amp; automations.</div>
+    <div><a href="https://github.com/trendsmcp/TrendWatch">GitHub</a> · <a href="https://www.trendsmcp.ai/docs">Docs</a> · <a href="https://trendsmcp.ai">trendsmcp.ai</a></div>
+  </footer>
+
+</div>
+</body>
+</html>
