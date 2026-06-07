@@ -60,5 +60,6 @@ jobs:
             echo "Nothing changed."
           else
             git commit -m "chore(trendwatch): update $(date -u +%Y-%m-%dT%H:%MZ)"
+            git pull --rebase
             git push
           fi
